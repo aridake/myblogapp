@@ -1,0 +1,95 @@
+【仮想環境の作成】
+コマンドプロンプト開く
+↓
+conda create 環境名
+↓
+activate 環境名
+
+
+【django使用準備】
+conda install django
+↓
+yを押下
+↓
+enter
+
+
+【djangoパッケージのインストール】
+「https://docs.djangoproject.com/ja/3.1/faq/install/」にアクセス
+↓
+verを確認しながら、適切なpython verをインストールする
+（コマンドプロンプトで conda create -n 環境名 python==pythonバージョン）
+↓
+y押下
+↓
+enter
+↓
+conda activate 環境名
+↓
+pip install django==djnagoバージョン
+
+
+【プロジェクトの作成】
+コマンドプロンプト閉じる
+↓
+コマンドプロンプト開く
+↓
+activate py36
+↓
+django-admin startproject プロジェクト名（例：myblogapp）
+↓
+cd プロジェクト名
+↓
+cd プロジェクト名（プロジェクト名の中のプロジェクトがフォルダが同一名のため）
+↓
+※余談 init.py：pythonパッケージだと知らせるもの,setting.py:設定ファイル（ファイル構成やアクセス制御を行うものや言語設定など）
+,admin.py:アプリケーションを追加していって、どのurlで呼ぶのかをパターン定義するもの,wsgi.py:wsgiとは(web server gatewat interface)で、apacheやngxなどのウェブサーバーとdjangoを連携するための設定を書くファイル
+
+
+【django内臓サーバーの起動】
+cd プロジェクト名(ex:ホームフォルダ/プロジェクト名)
+↓
+python manage.py runserver
+
+
+【初期設定】
+setting.pyを開く
+↓
+・言語設定の変更
+LANGUAGE_CODE = 'en-us'をコメントアウトし
+LANGUAGE_CODE = 'ja'を設定する
+
+・time zoneの設定
+TIME_ZONE = 'UTC'をコメントアウトし
+TIME_ZONE = 'Asia/Tokyo'とする
+
+
+【データベーステーブルの作成】:マイグレートする(migrate)
+python manage.py migrate（データテーブルが作成される）
+
+
+【アプリ追加】
+cd home/プロジェクト名
+↓
+python manage.py startapp アプリケーション名(単語の複数形で命名するとよい ex:posts,pols) 
+↓
+プロジェクト内に指定したアプリが出来ている
+↓
+（実際に出来上がったアプリフォルダ内に遷移すると、_init_.py,admin.py,apps.py,models.py,tests.py,views.pyが出来ている）
+↓
+（特に使うのがviews.py:ページの整形ファイル,models.py:データベースとwebページの連携ファイル）
+↓
+apps.pyを設定ファイルから呼べるように設定していく
+↓
+プロジェクトフォルダ遷移
+↓
+setting.py開く
+↓
+INSTALLED_APPSの中に追加する
+（アプリ名.apps.クラス名/ 例：'posts.apps.PostsConfig'を追加する）
+↓
+これで作成したアプリをプロジェクトから呼び出せるように関連付けが出来るようになった
+
+
+【】
+
